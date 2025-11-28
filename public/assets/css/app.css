@@ -12555,6 +12555,7 @@ span.flatpickr-weekday {
   }
 }
 
+
 .auth-one-bg {
   background-image: url("../images/register.png");
   background-position: center;
@@ -12563,7 +12564,7 @@ span.flatpickr-weekday {
 .auth-one-bg .bg-overlay {
   background: -webkit-gradient(linear, right top, left top, from(#7a51c5), to(#8c68cd));
   background: linear-gradient(to left, #7a51c5, #8c68cd);
-  opacity: 0.1;
+  opacity: 0.9;
 }
 
 .shape {

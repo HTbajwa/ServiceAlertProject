@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use Carbon\Carbon;
-
+use App\Models\DailyUsage;
 use function Symfony\Component\Clock\now;
 
 class ServiceItemService
@@ -37,6 +37,8 @@ class ServiceItemService
           $AgedFactor,
           $ConditionFactor,
           $data["UsageThresold"],
+          $data["user_id"], //user id
+          $data["service_item_id"] //service id
         );
         break;
       case 'both':
@@ -53,6 +55,8 @@ class ServiceItemService
           $AgedFactor,
           $ConditionFactor,
           $data["UsageThresold"],
+          $data["user_id"], //user id
+          $data["service_item_id"] //service id
         );
         return min($timebase, $usagebase);
         break;
@@ -64,18 +68,18 @@ class ServiceItemService
         return null;
         break;
     }
-    
   }
 
-public function WarratyAlerAccess(array $data){
-if (!empty($data["WarrantyAlert"]) && $data["WarrantyAlert"] == true) {
+  public function WarratyAlerAccess(array $data)
+  {
+    if (!empty($data["WarrantyAlert"]) && $data["WarrantyAlert"] == true) {
       return $this->WarrantyAlert(
         $data["WarrantyStartDate"],
         $data["WarrantyPeriod"],
         $data["WarrantyAlertDaysBefore"]
       );
     }
-}
+  }
 
 
 
@@ -95,43 +99,53 @@ if (!empty($data["WarrantyAlert"]) && $data["WarrantyAlert"] == true) {
     return max($factor, 0.05); //should not below 50%
   }
 
- private function timebaseAlert($timeThresold, $lastServicedate, $daysSpecific = 0, $AgeFactor, $conditionFactor)
-{
+  private function timebaseAlert($timeThresold, $lastServicedate, $daysSpecific = 0, $AgeFactor, $conditionFactor)
+  {
     // 30 * 0.8 * 0.9 = 21.6
     //40*0.8*0.85=27.2
 
     $adjustedTimeThreshold = $timeThresold * $conditionFactor * $AgeFactor;
 
     if (!empty($lastServicedate)) { //1-10-2025
-        $last = Carbon::parse($lastServicedate);
-        $newdate = $last->copy()->addDays(ceil($adjustedTimeThreshold)); // ceil to avoid fractions //29
+      $last = Carbon::parse($lastServicedate);
+      $newdate = $last->copy()->addDays(ceil($adjustedTimeThreshold)); // ceil to avoid fractions //29
     } else {
-        $newdate = Carbon::now()->addDays(ceil($adjustedTimeThreshold));  //29-3=26
+      $newdate = Carbon::now()->addDays(ceil($adjustedTimeThreshold));  //29-3=26
     }
 
     if ($daysSpecific != 0) {
-        $newdate = $newdate->copy()->subDays($daysSpecific); 
+      $newdate = $newdate->copy()->subDays($daysSpecific);
     }
 
     return $newdate;
-}
+  }
 
   //currentusage na ho agr
 
-  private function UsagebaseAlert($avgDailyUsage, $currentUsage, $AgeFactor, $conditionFactor, $usageThresold)
-  {
-
-//120*0.8*0.85=81.6
+ private function UsagebaseAlert($avgDailyUsage, $currentUsage, $AgeFactor, $conditionFactor, $usageThresold, $userId, $serviceId)
+{
     $adjustedUsageThreshold = $usageThresold * $conditionFactor * $AgeFactor;
-    $current = !empty($currentUsage) ? $currentUsage : 0; //50
-    $remainingusage = $adjustedUsageThreshold - $current; //81.6-50=31.6
-    if ($remainingusage <= 0) {
-      return now();
+//120*0.8*0.9=86.4
+    // Include total usage from DB + initial currentUsage
+    $totalUsage = DailyUsage::where('user_id', $userId)
+                            ->where('service_item_id', $serviceId)
+                            ->sum('usage');
+                            //12
+      
+    $allUsage=$totalUsage;
+//12
+    $remainingUsage = $adjustedUsageThreshold;
+    $remainingUsage-=$allUsage;
+//12-86.4
+    if ($remainingUsage <= 0) {
+        return now(); // threshold already reached
     }
-    //if avg daily use null or 0 then for that we use 1
-    $daysleft = $remainingusage / max($avgDailyUsage, 1); //5.266
-    return Carbon::now()->addDays(ceil($daysleft)); //6    //today date + 6=1 dec
-  }
+
+    // Days left based on avg daily usage
+    $daysLeft = $remainingUsage / max($avgDailyUsage, 1);
+
+    return Carbon::now()->addDays(ceil($daysLeft));
+}
 
   private function CustomAlert($customdate)
   {

@@ -12578,11 +12578,30 @@ span.flatpickr-weekday {
     .auth-one-bg-position {
         height: 280px;
     }
+     .auth-one-bg1-position {
+        height: 280px;
+    }
+}
+.auth-one-bg1 {
+    background-image: url(../images/loginImage.png);
+    background-position: center;
+    background-size: cover;
 }
 .auth-one-bg {
     background-image: url(../images/register.png);
     background-position: center;
     background-size: cover;
+}
+.auth-one-bg1 .bg-overlay {
+    background: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(#7a51c5),
+        to(#8c68cd)
+    );
+    background: linear-gradient(to right, #7a51c5, #8c68cd);
+    opacity: 0.2;
 }
 .auth-one-bg .bg-overlay {
     background: -webkit-gradient(

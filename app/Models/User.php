@@ -32,6 +32,10 @@ class User extends Authenticatable
       public function isRegUser(){
         return $this->role==='user';
     }
+    public function ServiceItems()
+    {
+        return $this->hasMany(ServiceItem::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

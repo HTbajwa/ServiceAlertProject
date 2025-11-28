@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId("user_id")->constrained()->onDelete("cascade");
             $table->foreignId("category_id")->nullable()->constrained()->onDelete("cascade");
-            $table->string("categoryName");
-            $table->string("itemType");
+            $table->foreignId("subcategory_id")->nullable()->constrained('subcategories')->onDelete("cascade");
+            $table->foreignId("service_type_id")->nullable()->constrained('service_types')->onDelete("cascade");
+            $table->string("categoryName")->nullable();
+            $table->string("itemType")->nullable();
             $table->string("itemAge"); //in years
             $table->enum("itemCondition", ["new", "moderate", "old"]);
-            $table->string("serviceType");
+            $table->string("serviceType")->nullable();
             //for custom SubCategory Name
             $table->boolean("isCustomSubCategory")->nullable()->default(false);
             $table->string("customSubcategoryName")->nullable();

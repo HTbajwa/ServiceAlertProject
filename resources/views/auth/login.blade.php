@@ -38,23 +38,25 @@
                         <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none">
                             <div class="row g-0">
                                 <div class="col-lg-6">
-                                    <div class="p-lg-5 p-4 auth-one-bg h-100">
+                                    <div class="p-lg-5 p-4 auth-one-bg1 h-100">
                                         <div class="bg-overlay"></div>
                                         <div class="position-relative h-100 d-flex flex-column">
                                             <div class="mb-4">
-                                                <a href="index.html" class="d-block">
+                                                {{-- <a href="index.html" class="d-block">
                                                     <img src="assets/images/logo-light.png" alt=""
                                                         height="18">
-                                                </a>
+                                                </a> --}}
+
+                                                <h1 class="fw-bold h-50 fs-2">Service App</h1>
                                             </div>
                                             <div class="mt-auto">
-                                                <div class="mb-3">
+                                                {{-- <div class="mb-3">
                                                     <i class="ri-double-quotes-l display-4 text-success"></i>
-                                                </div>
+                                                </div> --}}
 
                                                 <div id="qoutescarouselIndicators" class="carousel slide"
                                                     data-bs-ride="carousel">
-                                                    <div class="carousel-indicators">
+                                                    {{-- <div class="carousel-indicators">
                                                         <button type="button"
                                                             data-bs-target="#qoutescarouselIndicators"
                                                             data-bs-slide-to="0" class="active" aria-current="true"
@@ -65,8 +67,8 @@
                                                         <button type="button"
                                                             data-bs-target="#qoutescarouselIndicators"
                                                             data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                                    </div>
-                                                    <div class="carousel-inner text-center text-white pb-5">
+                                                    </div> --}}
+                                                    {{-- <div class="carousel-inner text-center text-white pb-5">
                                                         <div class="carousel-item active">
                                                             <p class="fs-15 fst-italic">" Great! Clean code, clean
                                                                 design, easy for customization. Thanks very much! "</p>
@@ -79,7 +81,7 @@
                                                             <p class="fs-15 fst-italic">" Great! Clean code, clean
                                                                 design, easy for customization. Thanks very much! "</p>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                                 <!-- end carousel -->
                                             </div>
@@ -132,7 +134,7 @@
                                                         In</button>
                                                 </div>
 
-                                                <div class="mt-4 text-center">
+                                                {{-- <div class="mt-4 text-center">
                                                     <div class="signin-other-title">
                                                         <h5 class="fs-13 mb-4 title">Sign In with</h5>
                                                     </div>
@@ -151,7 +153,7 @@
                                                             class="btn btn-info btn-icon waves-effect waves-light"><i
                                                                 class="ri-twitter-fill fs-16"></i></button>
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
                                             </form>
                                         </div>

@@ -46,7 +46,7 @@
                                                     <img src="{{ asset('assets/images/logo-light.png') }}"
                                                         alt="" height="18">
                                                 </a> --}}
-                                                <span class="font-weight-bold fs-6">Service App</span>
+                                                <h1 class="fw-bold h-50 fs-2">Service App</h1>
                                             </div>
                                             <div class="mt-auto">
                                                 {{-- <div class="mb-3">

@@ -45,4 +45,16 @@ class ServiceItem extends Model
     protected $casts = [
         "serviceHistory"=>'array'
     ];
+
+    public function DailyUsages(){
+        return $this->hasMany(DailyUsage::class);
+    }
+       public function subcategory()
+    {
+        return $this->belongsTo(Subcategory::class);
+    }
+       public function serviceType()
+    {
+        return $this->belongsTo(Servicetype::class);
+    }
 }
