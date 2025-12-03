@@ -11050,6 +11050,10 @@ div.dtr-modal div.dtr-modal-display {
 }
 div.dtr-modal div.dtr-modal-content {
     padding: 1.25rem;
+    border: 2px solid #00e5ff !important; 
+     background: #0d1b2a !important;        /* visible modal background */
+    border-radius: 12px !important;
+
 }
 div.dtr-modal div.dtr-modal-content h2 {
     font-size: 1.064rem;
@@ -15631,8 +15635,8 @@ span.flatpickr-weekday {
     fill: var(--vz-secondary-bg);
 }
 .bg-overlay-pattern {
-    background-image: url(../images/landing/bg-pattern.png);
-    background-color: transparent;
+    background-image: url(../images/galaxy/img-1.png);
+    /* background-color: transparent; */
     background-position: center;
     background-size: cover;
     opacity: 0.2;
@@ -16179,6 +16183,7 @@ body::before {
     position: relative;
     padding: 165px 0;
     overflow-x: hidden;
+    
 }
 .job-panel-filter {
     background-color: var(--vz-secondary-bg);

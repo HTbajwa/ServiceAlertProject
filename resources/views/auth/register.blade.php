@@ -23,6 +23,32 @@
     <!-- custom Css-->
     <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
+    <style>
+        .modal-backdrop {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            background-color: rgba(0, 0, 0, 0.5) !important;
+        }
+        .modal-content{
+            
+            
+            
+             border: 2px solid  #8C74AA !important; 
+     background: #0d1b2a !important;        /* visible modal background */
+    border-radius: 12px !important;
+        }
+
+.dtr-modal {
+    pointer-events: none !important;
+}
+
+.dtr-modal .dtr-modal-content {
+    pointer-events: auto !important;
+    z-index: 999999 !important;
+    position: relative;
+}
+
+    </style>
 </head>
 
 <body>
@@ -87,12 +113,12 @@
                                         </div>
 
                                         <div class="mt-4">
-                                            <form class="needs-validation" novalidate action="index.html">
+                                            <form id="RegisterForm" class="needs-validation" novalidate>
 
                                                 <div class="mb-3">
                                                     <label for="useremail" class="form-label">Email <span
                                                             class="text-danger">*</span></label>
-                                                    <input type="email" class="form-control" id="useremail"
+                                                    <input type="email" class="form-control" id="email"
                                                         placeholder="Enter email address" required>
                                                     <div class="invalid-feedback">
                                                         Please enter email
@@ -101,7 +127,7 @@
                                                 <div class="mb-3">
                                                     <label for="username" class="form-label">Username <span
                                                             class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="username"
+                                                    <input type="text" class="form-control" id="name"
                                                         placeholder="Enter username" required>
                                                     <div class="invalid-feedback">
                                                         Please enter username
@@ -114,7 +140,7 @@
                                                         <input type="password" class="form-control pe-5 password-input"
                                                             onpaste="return false" placeholder="Enter password"
                                                             id="password-input" aria-describedby="passwordInput"
-                                                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                                            required>
                                                         <button
                                                             class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
                                                             type="button" id="password-addon"><i
@@ -131,18 +157,47 @@
 
                                                 <div id="password-contain" class="p-3 bg-light mb-2 rounded">
                                                     <h5 class="fs-13">Password must contain:</h5>
-                                                    <p id="pass-length" class="invalid fs-12 mb-2">Minimum <b>8
+                                                    <p id="pass-length" class="invalid fs-12 mb-2">Minimum <b>6
                                                             characters</b></p>
                                                     <p id="pass-lower" class="invalid fs-12 mb-2">At <b>lowercase</b>
                                                         letter (a-z)</p>
                                                     <p id="pass-upper" class="invalid fs-12 mb-2">At least
-                                                        <b>uppercase</b> letter (A-Z)</p>
+                                                        <b>uppercase</b> letter (A-Z)
+                                                    </p>
                                                     <p id="pass-number" class="invalid fs-12 mb-0">A least
-                                                        <b>number</b> (0-9)</p>
+                                                        <b>number</b> (0-9)
+                                                    </p>
+                                                </div>
+
+
+
+                                                <div class="row">
+                                                    <!-- Phone Field -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="userphone" class="form-label">Phone <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="phone"
+                                                            placeholder="Enter phone number" required>
+                                                        <div class="invalid-feedback">
+                                                            Please enter phone number
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Role Field -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="role" class="form-label">Role</label>
+                                                        <select class="form-select " id="role">
+                                                            {{-- <option class="bg-dark" value="admin">Admin</option> --}}
+                                                            <option class="bg-dark" value="user">User</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
 
                                                 <div class="mt-4">
-                                                    <button class="btn btn-primary w-100" type="submit">Sign
+                                                    {{-- <button class="btn btn-primary w-100" type="submit">Sign
+                                                        Up</button> --}}
+                                                    <button type="submit" class="btn btn-primary w-100"
+                                                    >Sign
                                                         Up</button>
                                                 </div>
 
@@ -158,8 +213,42 @@
                                                         <button type="button" class="btn btn-info btn-icon waves-effect waves-light"><i class="ri-twitter-fill fs-16"></i></button>
                                                     </div>
                                                 </div> --}}
+
+
+
+
                                             </form>
                                         </div>
+                                        {{-- <div id="result">
+
+</div> --}}
+
+                                        <div id="topmodal" class="modal fade" tabindex="-1" aria-hidden="true"
+                                            style="--bs-modal-backdrop-opacity:0.5;">
+                                            <div class="modal-dialog modal-dialog-centered ">
+                                                <div class="modal-content  text-light bg-dark">
+                                                    <div class="modal-body text-center p-5">
+                                                        <lord-icon src="https://cdn.lordicon.com/pithnlch.json"
+                                                            trigger="loop" colors="primary:#8C74AA,secondary:#08a88a"
+                                                            style="width:120px;height:120px">
+                                                        </lord-icon>
+                                                        <div class="mt-4">
+                                                            <h4 class="mb-3" id="registerheader"></h4>
+                                                            <h5 class="text-muted mb-4">Welcome to ServiceApp💕</h5>
+                                                            <div class=" gap-2 justify-content-center">
+                                                                {{-- <button onclick="window.location.href='{{ route('login') }}'" type="button"
+                                                                    class="btn btn-primary cursor-pointer  fw-medium"
+                                                                    data-bs-dismiss="modal">LOG IN</button> --}}
+                                                                {{-- <button type="button" class="btn btn-success"
+                                                                    onclick="bootstrap.Modal.getInstance(document.getElementById('topmodal')).hide()">Completed</button> --}}
+
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+
 
                                         <div class="mt-5 text-center">
                                             <p class="mb-0">Already have an account ? <a href="{{ route('login') }}"
@@ -210,10 +299,66 @@
     <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
 
+
+    {{-- model js --}}
+    {{-- <script src="{{asset('assets/js/pages/modal.init.js')}}"></script>
+
+      <script src="{{asset('assets/js/app.js')}}"></script> --}}
+
     <!-- validation init -->
     <script src="{{ asset('assets/js/pages/form-validation.init.js') }}"></script>
     <!-- password create init -->
     <script src="{{ asset('assets/js/pages/passowrd-create.init.js') }}"></script>
+
+    <script>
+        document.getElementById("RegisterForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            fetch("http://127.0.0.1:8000/api/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: document.getElementById("name").value,
+                        email: document.getElementById("email").value,
+                        password: document.getElementById("password-input").value,
+                        phone: document.getElementById("phone").value,
+                        role: document.getElementById("role").value
+
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    let message = '';
+                    if (typeof data.message === 'string') {
+                         message=data.message 
+                    } else {
+                        message=data.message.name??
+                        data.message.email??
+                        data.message.password??
+                        data.message.phone??
+                        data.message.role??
+                         "validation error";
+                    }
+             document.getElementById("registerheader").innerHTML=message;
+              document.getElementById("RegisterForm").reset();
+    let modelid=document.getElementById("topmodal");
+           let modal= new bootstrap.Modal(modelid);
+            modal.show()
+
+            setTimeout(() => {
+           
+            modal.hide()
+        }, 3000);   
+                })
+                .catch(err => console.log(err))
+
+        })
+
+    
+    </script>
 </body>
 
 </html>

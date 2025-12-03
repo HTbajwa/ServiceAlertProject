@@ -156,7 +156,7 @@ class ServiceItemService
   {
 
     $startdate = Carbon::parse($warrantyStartDate);
-    $warrantyEnd = $startdate->copy()->addDays($warrantyPeriod);
+    $warrantyEnd = $startdate->copy()->addYears($warrantyPeriod);
     if ($daysBefore > 0) {
       $warrantyEnd->subDays($daysBefore);
     }

@@ -58,7 +58,7 @@ class CategoryController extends Controller
 
     public function getAllCategories(Request $request)
     {
-        return Category::all();
+        return Category::with('subcategories.serviceTypes')->get();
     }
     public function getCategoryById($id)
     {

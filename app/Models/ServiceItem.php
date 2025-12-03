@@ -10,6 +10,8 @@ class ServiceItem extends Model
     protected $fillable = [
         "user_id", 
         "category_id",
+        'subcategory_id',      
+    'service_type_id',    
         "categoryName",
         "itemType",
         "itemAge",

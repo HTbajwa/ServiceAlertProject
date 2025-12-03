@@ -3,7 +3,8 @@
 User Dashboard
 @endsection
 @section("content")
-Hello user
+
+@include('pages.userServices')
 @endsection
 @section("foot")
 @service app User

@@ -48,17 +48,21 @@
 
                  <li class="nav-item">
                      <a class="nav-link menu-link" href="{{route('register')}}">
-                         <i class="ri-honour-line"></i><span>Users</span>
+                         <i class="ri-honour-line"></i><span>User Profile</span>
                      </a>
                  </li>
                  <li class="nav-item">
-                <a class="nav-link menu-link" href="{{route('login')}}">
-                         <i class="ri-honour-line"></i><span>Services</span>
+                <a class="nav-link menu-link" href="{{route('service')}}">
+                         <i class="ri-honour-line"></i><span>Service</span>
+                     </a>
+                 </li>
+                  <a class="nav-link menu-link" href="{{route('cservice')}}">
+                         <i class="ri-honour-line"></i><span>Service create</span>
                      </a>
                  </li>
                  <li class="nav-item">
                      <a class="nav-link menu-link" href="">
-                         <i class="ri-honour-line"></i><span>Categories</span>
+                         <i class="ri-honour-line"></i><span>Daily Usage</span>
                      </a>
                  </li>
 

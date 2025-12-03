@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Servicetype extends Model
 {
     //
+    protected $table = 'service_types';
     protected $fillable = [
         "subcategory_id",
         "service_type"

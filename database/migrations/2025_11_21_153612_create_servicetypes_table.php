@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('servicetypes', function (Blueprint $table) {
+        Schema::create('service_types', function (Blueprint $table) {
             $table->id();
             //relationship direct with subactegory
             $table->foreignId('subcategory_id')->constrained()->onDelete('cascade');

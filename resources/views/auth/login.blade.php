@@ -23,6 +23,40 @@
     <!-- custom Css-->
     <link href="assets/css/custom.min.css" rel="stylesheet" type="text/css" />
 
+
+    <style>
+        .modal-backdrop {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            background-color: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .modal-content {
+
+
+
+            border: 2px solid #8C74AA !important;
+            background: #0d1b2a !important;
+            /* visible modal background */
+            border-radius: 12px !important;
+        }
+
+        .dtr-modal {
+            pointer-events: none !important;
+        }
+
+        .dtr-modal .dtr-modal-content {
+            pointer-events: auto !important;
+            z-index: 999999 !important;
+            position: relative;
+        }
+    </style>
+
+
+
+
+
+
 </head>
 
 <body>
@@ -94,27 +128,27 @@
                                     <div class="p-lg-5 p-4">
                                         <div>
                                             <h5 class="text-primary">Welcome Back !</h5>
-                                            <p class="text-muted">Sign in to continue to Velzon.</p>
+                                            <p class="text-muted">Sign in to continue to Service App.</p>
                                         </div>
 
                                         <div class="mt-4">
-                                            <form action="index.html">
+                                            <form id="loginform">
 
                                                 <div class="mb-3">
-                                                    <label for="username" class="form-label">Username</label>
-                                                    <input type="text" class="form-control" id="username"
-                                                        placeholder="Enter username">
+                                                    <label for="username" class="form-label">Email</label>
+                                                    <input type="email" class="form-control" id="email"
+                                                        placeholder="Enter email" required>
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <div class="float-end">
+                                                    {{-- <div class="float-end">
                                                         <a href="auth-pass-reset-cover.html" class="text-muted">Forgot
                                                             password?</a>
-                                                    </div>
+                                                    </sodiv> --}}
                                                     <label class="form-label" for="password-input">Password</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
                                                         <input type="password" class="form-control pe-5 password-input"
-                                                            placeholder="Enter password" id="password-input">
+                                                            placeholder="Enter password" id="password-input" required>
                                                         <button
                                                             class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon"
                                                             type="button" id="password-addon"><i
@@ -122,12 +156,12 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check">
+                                                {{-- <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="auth-remember-check">
                                                     <label class="form-check-label" for="auth-remember-check">Remember
                                                         me</label>
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="mt-4">
                                                     <button class="btn btn-primary w-100" type="submit">Sign
@@ -158,8 +192,37 @@
                                             </form>
                                         </div>
 
+                                        {{-- topmodal --}}
+                                        <div id="topmodal" class="modal fade" tabindex="-1" aria-hidden="true"
+                                            style="--bs-modal-backdrop-opacity:0.5;">
+                                            <div class="modal-dialog modal-dialog-centered ">
+                                                <div class="modal-content  text-light bg-dark">
+                                                    <div class="modal-body text-center p-5">
+                                                        <lord-icon src="https://cdn.lordicon.com/pithnlch.json"
+                                                            trigger="loop" colors="primary:#8C74AA,secondary:#08a88a"
+                                                            style="width:120px;height:120px">
+                                                        </lord-icon>
+                                                        <div class="mt-4">
+                                                            <h4 class="mb-3" id="loginheader"></h4>
+                                                            <h5 class="text-muted mb-4">Welcome to ServiceApp💕</h5>
+                                                            <div class=" gap-2 justify-content-center">
+                                                                {{-- <button onclick="window.location.href='{{ route('login') }}'" type="button"
+                                                                    class="btn btn-primary cursor-pointer  fw-medium"
+                                                                    data-bs-dismiss="modal">LOG IN</button> --}}
+                                                                {{-- <button type="button" class="btn btn-success"
+                                                                    onclick="bootstrap.Modal.getInstance(document.getElementById('topmodal')).hide()">Completed</button> --}}
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+
+
+
                                         <div class="mt-5 text-center">
-                                            <p class="mb-0">Don't have an account ? <a href="{{route("register")}}"
+                                            <p class="mb-0">Don't have an account ? <a href="{{ route('register') }}"
                                                     class="fw-semibold text-primary text-decoration-underline">
                                                     Signup</a> </p>
                                         </div>
@@ -190,7 +253,7 @@
                                 <script>
                                     document.write(new Date().getFullYear())
                                 </script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i>
-                                by Themesbrand
+                              
                             </p>
                         </div>
                     </div>
@@ -202,15 +265,83 @@
     <!-- end auth-page-wrapper -->
 
     <!-- JAVASCRIPT -->
-    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="assets/libs/node-waves/waves.min.js"></script>
-    <script src="assets/libs/feather-icons/feather.min.js"></script>
-    <script src="assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
-    <script src="assets/js/plugins.js"></script>
+    <script src='{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}'></script>
+    <script src='{{ asset('assets/libs/simplebar/simplebar.min.js') }}'></script>
+    <script src='{{ asset('assets/libs/node-waves/waves.min.js') }}'></script>
+    <script src='{{ asset('assets/libs/feather-icons/feather.min.js') }}'></script>
+    <script src='{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}'></script>
+    <script src='{{ asset('assets/js/plugins.js') }}'></script>
 
     <!-- password-addon init -->
-    <script src="assets/js/pages/password-addon.init.js"></script>
+    <script src='{{ asset('assets/js/pages/password-addon.init.js') }}'></script>
+    <script>
+        document.getElementById("loginform").addEventListener("submit", function(e) {
+            e.preventDefault();
+            fetch("http://127.0.0.1:8000/api/login", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: document.getElementById("email").value,
+                        password: document.getElementById("password-input").value,
+
+                    })
+                })
+
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                      let message = '';
+                      let isSuccess=false;
+               if(data.access_token)
+               {
+                message:"Login Successful.......Redirecting";
+                isSuccess=true;
+                localStorage.setItem("auth_token",data.access_token);
+
+               }
+                //  (typeof data.message === 'string') {
+                //         message = data.message
+                //     } else {
+                  else{
+                        data.user.email ??
+                            data.user.password ??
+
+                            "validation error";
+                    }
+
+                    document.getElementById("loginheader").innerHTML = message;
+                    
+                    let modelid = document.getElementById("topmodal");
+                    let modal = new bootstrap.Modal(modelid);
+                    modal.show()
+                  if(isSuccess)
+                  {
+document.getElementById("loginform").reset();
+setTimeout(() => {
+     modal.hide();
+window.location.href="/user";
+                       
+                    }, 1500);
+                  }
+                  else{
+setTimeout(() => {
+
+                        modal.hide()
+                    }, 3000);
+                  }
+                    
+            
+                   
+        
+                })
+                
+                .catch(err => console.log(err))
+
+        })
+    </script>
 </body>
 
 </html>
